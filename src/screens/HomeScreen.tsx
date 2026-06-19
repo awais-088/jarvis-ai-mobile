@@ -1,19 +1,33 @@
 import React from 'react';
 import { ScrollView, Text, View, StyleSheet } from 'react-native';
-
+import SystemMetricCard from '../components/SystemMetricCard';
 import AIOrb from '../components/AIOrb';
 import GlassCard from '../components/GlassCard';
 import { COLORS } from '../theme/colors';
-
+import VoiceWave from '../components/VoiceWave';
 const HomeScreen = () => {
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <Text style={styles.greeting}>Good Evening</Text>
+      <Text style={styles.system}>JARVIS OS</Text>
 
-      <Text style={styles.name}>Alexander</Text>
+      <Text style={styles.name}>ONLINE</Text>
 
+      <Text style={styles.subTitle}>Artificial Intelligence Assistant</Text>
+      <Text style={styles.startup}>Hello Awais, how can I help you today?</Text>
       <View style={styles.orbContainer}>
         <AIOrb />
+        <VoiceWave />
+      </View>
+      <View style={styles.metricsRow}>
+        <SystemMetricCard title="CPU" value="14%" />
+
+        <SystemMetricCard title="RAM" value="39%" />
+      </View>
+
+      <View style={styles.metricsRow}>
+        <SystemMetricCard title="NETWORK" value="99%" />
+
+        <SystemMetricCard title="AI CORE" value="ACTIVE" />
       </View>
 
       <GlassCard>
@@ -26,6 +40,15 @@ const HomeScreen = () => {
         <Text style={styles.cardTitle}>AI Status</Text>
 
         <Text style={styles.cardText}>Online</Text>
+      </GlassCard>
+      <GlassCard>
+        <Text style={styles.cardTitle}>SYSTEM STATUS</Text>
+
+        <Text style={styles.cardText}>Voice Engine Ready</Text>
+
+        <Text style={styles.cardText}>AI Core Active</Text>
+
+        <Text style={styles.cardText}>Device Control Pending</Text>
       </GlassCard>
 
       <GlassCard>
@@ -54,12 +77,30 @@ const styles = StyleSheet.create({
     color: COLORS.gray,
     fontSize: 18,
   },
-
+  startup: {
+    color: '#00E5FF',
+    marginTop: 12,
+    fontSize: 15,
+  },
+  subTitle: {
+    color: '#64748B',
+    fontSize: 14,
+    marginTop: 6,
+  },
+  metricsRow: {
+    flexDirection: 'row',
+    marginBottom: 10,
+  },
   name: {
     color: COLORS.text,
     fontSize: 34,
     fontWeight: 'bold',
     marginTop: 5,
+  },
+  system: {
+    color: '#00E5FF',
+    fontSize: 18,
+    letterSpacing: 4,
   },
 
   orbContainer: {
