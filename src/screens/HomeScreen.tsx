@@ -5,9 +5,12 @@ import AIOrb from '../components/AIOrb';
 import GlassCard from '../components/GlassCard';
 import { COLORS } from '../theme/colors';
 import VoiceWave from '../components/VoiceWave';
+import HUDPanel from '../components/HUDPanel';
 const HomeScreen = () => {
+  const now = new Date();
   return (
     <ScrollView style={styles.container} contentContainerStyle={styles.content}>
+      <Text style={styles.time}>{now.toLocaleTimeString()}</Text>
       <Text style={styles.system}>JARVIS OS</Text>
 
       <Text style={styles.name}>ONLINE</Text>
@@ -16,6 +19,17 @@ const HomeScreen = () => {
       <Text style={styles.startup}>Hello Awais, how can I help you today?</Text>
       <View style={styles.orbContainer}>
         <AIOrb />
+        <View style={styles.row}>
+          <HUDPanel title="CPU" value="14%" />
+
+          <HUDPanel title="RAM" value="38%" />
+        </View>
+
+        <View style={styles.row}>
+          <HUDPanel title="NETWORK" value="ONLINE" />
+
+          <HUDPanel title="BATTERY" value="84%" />
+        </View>
         <VoiceWave />
       </View>
       <View style={styles.metricsRow}>
@@ -72,7 +86,14 @@ const styles = StyleSheet.create({
     padding: 24,
     paddingTop: 60,
   },
-
+  time: {
+    color: '#00E5FF',
+    fontSize: 16,
+    marginBottom: 10,
+  },
+  row: {
+    flexDirection: 'row',
+  },
   greeting: {
     color: COLORS.gray,
     fontSize: 18,

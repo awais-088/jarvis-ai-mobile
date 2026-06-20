@@ -4,11 +4,11 @@ import { View, StyleSheet } from 'react-native';
 const VoiceWave = () => {
   return (
     <View style={styles.container}>
-      <View style={[styles.bar, { height: 20 }]} />
-      <View style={[styles.bar, { height: 40 }]} />
-      <View style={[styles.bar, { height: 60 }]} />
-      <View style={[styles.bar, { height: 30 }]} />
-      <View style={[styles.bar, { height: 50 }]} />
+      <View style={[styles.bar, styles.h20]} />
+      <View style={[styles.bar, styles.h30]} />
+      <View style={[styles.bar, styles.h40]} />
+      <View style={[styles.bar, styles.h50]} />
+      <View style={[styles.bar, styles.h60]} />
     </View>
   );
 };
@@ -32,4 +32,9 @@ const styles = StyleSheet.create({
 
     borderRadius: 10,
   },
+  h20: { height: 20 },
+  h30: { height: 30 },
+  h40: { height: 40 },
+  h50: { height: 50 },
+  h60: { height: 60 },
 });
