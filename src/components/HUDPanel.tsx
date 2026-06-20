@@ -1,17 +1,20 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-interface Props {
-  title: string;
-  value: string;
-}
+const HUDPanel = () => {
+  const hour = new Date().getHours();
 
-const HUDPanel = ({ title, value }: Props) => {
+  let greeting = 'Hello';
+
+  if (hour < 12) greeting = 'Good Morning';
+  else if (hour < 18) greeting = 'Good Afternoon';
+  else greeting = 'Good Evening';
+
   return (
-    <View style={styles.card}>
-      <Text style={styles.title}>{title}</Text>
+    <View style={styles.container}>
+      <Text style={styles.greeting}>{greeting}</Text>
 
-      <Text style={styles.value}>{value}</Text>
+      <Text style={styles.status}>Jarvis Core Online</Text>
     </View>
   );
 };
@@ -19,30 +22,20 @@ const HUDPanel = ({ title, value }: Props) => {
 export default HUDPanel;
 
 const styles = StyleSheet.create({
-  card: {
-    flex: 1,
-
-    backgroundColor: '#0F172A',
-
-    borderRadius: 20,
-
-    margin: 6,
-
-    padding: 18,
-
-    borderWidth: 1,
-
-    borderColor: '#00E5FF55',
+  container: {
+    marginBottom: 30,
   },
 
-  title: {
-    color: '#64748B',
+  greeting: {
+    color: '#FFFFFF',
+    fontSize: 32,
+    fontWeight: '700',
   },
 
-  value: {
+  status: {
     color: '#00E5FF',
-    fontSize: 20,
-    fontWeight: 'bold',
-    marginTop: 8,
+    fontSize: 14,
+    marginTop: 4,
+    letterSpacing: 1,
   },
 });

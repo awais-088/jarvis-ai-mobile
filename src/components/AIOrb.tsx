@@ -1,7 +1,12 @@
 import React, { useEffect, useRef } from 'react';
 import { Animated, View, StyleSheet } from 'react-native';
 
-const AIOrb = () => {
+type Props = {
+  listening?: boolean;
+  processing?: boolean;
+};
+
+const AIOrb = ({ listening, processing }: Props) => {
   const pulse = useRef(new Animated.Value(1)).current;
 
   const rotate = useRef(new Animated.Value(0)).current;
@@ -36,7 +41,11 @@ const AIOrb = () => {
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
   });
-
+  const innerColorStyle = processing
+    ? styles.processing
+    : listening
+    ? styles.listening
+    : styles.ready;
   return (
     <View style={styles.container}>
       <Animated.View
@@ -57,7 +66,7 @@ const AIOrb = () => {
         ]}
       >
         <View style={styles.middle}>
-          <View style={styles.inner} />
+          <View style={[styles.inner, innerColorStyle]} />
         </View>
       </Animated.View>
     </View>
@@ -71,7 +80,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  ready: {
+    backgroundColor: '#00E5FF',
+  },
 
+  listening: {
+    backgroundColor: '#00FFAA',
+  },
+
+  processing: {
+    backgroundColor: '#FFD700',
+  },
   rotatingRing: {
     position: 'absolute',
 
@@ -114,17 +133,13 @@ const styles = StyleSheet.create({
   inner: {
     width: 100,
     height: 100,
-
     borderRadius: 50,
 
-    backgroundColor: '#00D9FF',
     borderWidth: 2,
     borderColor: '#67E8F9',
 
     shadowColor: '#00E5FF',
-
     shadowOpacity: 1,
-
     shadowRadius: 25,
 
     elevation: 20,

@@ -6,71 +6,85 @@ import GlassCard from '../components/GlassCard';
 import { COLORS } from '../theme/colors';
 import VoiceWave from '../components/VoiceWave';
 import HUDPanel from '../components/HUDPanel';
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 const HomeScreen = () => {
   const now = new Date();
   return (
-    <ScrollView style={styles.container} contentContainerStyle={styles.content}>
-      <Text style={styles.time}>{now.toLocaleTimeString()}</Text>
-      <Text style={styles.system}>JARVIS OS</Text>
+    <SafeAreaView style={styles.container}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={styles.content}
+      >
+        <Text style={styles.time}>{now.toLocaleTimeString()}</Text>
+        <HUDPanel />
+        <Text style={styles.system}>JARVIS OS</Text>
 
-      <Text style={styles.name}>ONLINE</Text>
+        <Text style={styles.name}>ONLINE</Text>
 
-      <Text style={styles.subTitle}>Artificial Intelligence Assistant</Text>
-      <Text style={styles.startup}>Hello Awais, how can I help you today?</Text>
-      <View style={styles.orbContainer}>
-        <AIOrb />
-        <View style={styles.row}>
-          <HUDPanel title="CPU" value="14%" />
+        <Text style={styles.subTitle}>Artificial Intelligence Assistant</Text>
+        <Text style={styles.startup}>
+          Hello Awais, how can I help you today?
+        </Text>
+        <View style={styles.orbContainer}>
+          <AIOrb />
+          <View style={styles.metricsRow}>
+            <SystemMetricCard title="CPU" value="98%" />
 
-          <HUDPanel title="RAM" value="38%" />
+            <View style={styles.metricGap} />
+
+            <SystemMetricCard title="RAM" value="16GB" />
+          </View>
+
+          <View style={styles.metricsRow}>
+            <SystemMetricCard title="NETWORK" value="ONLINE" />
+
+            <View style={styles.metricGap} />
+
+            <SystemMetricCard title="BATTERY" value="100%" />
+          </View>
+          <VoiceWave />
+        </View>
+        <View style={styles.metricsRow}>
+          <SystemMetricCard title="CPU" value="14%" />
+
+          <SystemMetricCard title="RAM" value="39%" />
         </View>
 
-        <View style={styles.row}>
-          <HUDPanel title="NETWORK" value="ONLINE" />
+        <View style={styles.metricsRow}>
+          <SystemMetricCard title="NETWORK" value="99%" />
 
-          <HUDPanel title="BATTERY" value="84%" />
+          <SystemMetricCard title="AI CORE" value="ACTIVE" />
         </View>
-        <VoiceWave />
-      </View>
-      <View style={styles.metricsRow}>
-        <SystemMetricCard title="CPU" value="14%" />
 
-        <SystemMetricCard title="RAM" value="39%" />
-      </View>
+        <GlassCard>
+          <Text style={styles.cardTitle}>Voice Assistant</Text>
 
-      <View style={styles.metricsRow}>
-        <SystemMetricCard title="NETWORK" value="99%" />
+          <Text style={styles.cardText}>Ready to listen...</Text>
+        </GlassCard>
 
-        <SystemMetricCard title="AI CORE" value="ACTIVE" />
-      </View>
+        <GlassCard>
+          <Text style={styles.cardTitle}>AI Status</Text>
 
-      <GlassCard>
-        <Text style={styles.cardTitle}>Voice Assistant</Text>
+          <Text style={styles.cardText}>Online</Text>
+        </GlassCard>
+        <GlassCard>
+          <Text style={styles.cardTitle}>SYSTEM STATUS</Text>
 
-        <Text style={styles.cardText}>Ready to listen...</Text>
-      </GlassCard>
+          <Text style={styles.cardText}>Voice Engine Ready</Text>
 
-      <GlassCard>
-        <Text style={styles.cardTitle}>AI Status</Text>
+          <Text style={styles.cardText}>AI Core Active</Text>
 
-        <Text style={styles.cardText}>Online</Text>
-      </GlassCard>
-      <GlassCard>
-        <Text style={styles.cardTitle}>SYSTEM STATUS</Text>
+          <Text style={styles.cardText}>Device Control Pending</Text>
+        </GlassCard>
 
-        <Text style={styles.cardText}>Voice Engine Ready</Text>
+        <GlassCard>
+          <Text style={styles.cardTitle}>Quick Actions</Text>
 
-        <Text style={styles.cardText}>AI Core Active</Text>
-
-        <Text style={styles.cardText}>Device Control Pending</Text>
-      </GlassCard>
-
-      <GlassCard>
-        <Text style={styles.cardTitle}>Quick Actions</Text>
-
-        <Text style={styles.cardText}>WhatsApp • Chrome • Calls</Text>
-      </GlassCard>
-    </ScrollView>
+          <Text style={styles.cardText}>WhatsApp • Chrome • Calls</Text>
+        </GlassCard>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -80,6 +94,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.background,
+    paddingBottom: 120,
   },
 
   content: {
@@ -110,8 +125,13 @@ const styles = StyleSheet.create({
   },
   metricsRow: {
     flexDirection: 'row',
-    marginBottom: 10,
+    marginBottom: 12,
   },
+
+  metricGap: {
+    width: 12,
+  },
+
   name: {
     color: COLORS.text,
     fontSize: 34,

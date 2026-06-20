@@ -1,46 +1,33 @@
-import Voice from '@react-native-voice/voice';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-const useVoice = () => {
-  const [text, setText] = useState('');
+export const useVoice = () => {
   const [isListening, setIsListening] = useState(false);
 
-  useEffect(() => {
-    Voice.onSpeechResults = result => {
-      if (result.value?.length) {
-        setText(result.value[0]);
-      }
-    };
+  const [isProcessing, setIsProcessing] = useState(false);
 
-    return () => {
-      Voice.destroy().then(Voice.removeAllListeners);
-    };
-  }, []);
+  const [text, setText] = useState('');
 
-  const startListening = async () => {
-    try {
-      setIsListening(true);
-      await Voice.start('en-US');
-    } catch (error) {
-      console.log(error);
-    }
+  const startListening = () => {
+    setIsListening(true);
+
+    setText('Hello Jarvis');
   };
 
-  const stopListening = async () => {
-    try {
-      await Voice.stop();
-      setIsListening(false);
-    } catch (error) {
-      console.log(error);
-    }
+  const stopListening = () => {
+    setIsListening(false);
+
+    setIsProcessing(true);
+
+    setTimeout(() => {
+      setIsProcessing(false);
+    }, 2000);
   };
 
   return {
     text,
     isListening,
+    isProcessing,
     startListening,
     stopListening,
   };
 };
-
-export default useVoice;
